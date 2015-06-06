@@ -59,8 +59,8 @@ decodificar x [] = []
 decodificar x (hmsj:tmsj) | not(esMin hmsj) = hmsj : decodificar x tmsj
 decodificar x (hmsj:tmsj) | esMin hmsj = (desplazar (-x)  hmsj) : decodificar x tmsj
 
---frec :: String -> [Float]
 --frec msj devuelve la lista de los promedios
+frec :: String -> [Float]
 frec msj = reverse (aux 25 msj) 
 
 {- Esta función auxiliar recorre los valores que representan
@@ -72,3 +72,7 @@ aux x msj = porcentaje x msj : (aux (x-1) msj)
 --Esta es la función que hace el calculo del porcentaje
 porcentaje char msj | cantMinusc msj == 0 = 0
 porcentaje char msj | otherwise = fromIntegral(contar (natALet char) msj) / fromIntegral(cantMinusc msj)
+
+rotar :: Int -> [a] -> [a]
+rotar 0 msj = msj
+rotar n (hmsj:tmsj) = rotar (n-1) (tmsj ++ [hmsj])
