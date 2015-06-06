@@ -33,7 +33,7 @@ Por lo tanto, mod K J con K < 0 = J - (mod |K| J)
 
 cantMinusc :: String -> Integer
 
-ca ntMinusc [] = 0
+cantMinusc [] = 0
 cantMinusc x | not (esMin (head x)) = cantMinusc (tail x)
 cantMinusc x | esMin (head x) = 1 + cantMinusc (tail x)
 
@@ -60,4 +60,7 @@ decodificar x (hmsj:tmsj) | not(esMin hmsj) = hmsj : decodificar x tmsj
 decodificar x (hmsj:tmsj) | esMin hmsj = (desplazar (-x)  hmsj) : decodificar x tmsj
 
 
+--frec :: String -> [Float]
 
+frec msj = reverse (aux 25 msj) 
+	where aux x msj = contar x msj : aux (x-1) msj
