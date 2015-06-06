@@ -53,9 +53,11 @@ codificar x (hmsj:tmsj) | not(esMin hmsj) = hmsj : codificar x tmsj
 codificar x (hmsj:tmsj) | esMin hmsj = (desplazar x hmsj) : codificar x tmsj
 
 
---decodificar x [] = []
---decodificar x (hmsj:tmsj) | not(esMin hmsj) = hmsj : codificar x tmsj'
---decodificar x (hmsj:tmsj) | esMin hmsj = (desplazar x  hmsj) : codificar x tmsj
+decodificar :: Int -> String -> String
+
+decodificar x [] = []
+decodificar x (hmsj:tmsj) | not(esMin hmsj) = hmsj : decodificar x tmsj
+decodificar x (hmsj:tmsj) | esMin hmsj = (desplazar (-x)  hmsj) : decodificar x tmsj
 
 
 
