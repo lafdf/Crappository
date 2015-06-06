@@ -76,3 +76,14 @@ porcentaje char msj | otherwise = fromIntegral(contar (natALet char) msj) / from
 rotar :: Int -> [a] -> [a]
 rotar 0 msj = msj
 rotar n (hmsj:tmsj) = rotar (n-1) (tmsj ++ [hmsj])
+
+--Chi2. Asumo que ambas listas tienen que ser del mismo tamaño.
+chi2 :: [Float] -> [Float] -> Float
+chi2 [] _ = 0
+chi2 _ [] = 0
+chi2 (x:tx) (y:ty) = ((x-y)^2 ) / y + (chi2 tx ty)
+
+{- 7)
+a) Es fácil, es solamente llamar la función frec con el texto.
+b) Acá es donde se pone picante.
+-}
