@@ -7,18 +7,18 @@ esMin 'ñ' = False
 esMin x = (toUpper x) /= x
 
 
-letANat :: Char -> Int
+letANat :: Char -> Integer	
 
-letANat n = (ord n) - 97
+letANat n = fromIntegral (ord n) - 97 			--ACA USE fromIntegral
 
 
-natALet :: Int -> Char
+natALet :: Integer -> Char
 
 --natALet x | x <= 25 && x >= 0 = (chr (x + 97)) 
 --natALet x | otherwise = natALet (mod x 26)
-natALet x = chr ( (mod x 26) + 97 )
+natALet x =  chr ((fromIntegral (mod x 26) ) + 97)         --ACA USE fromIntegral
 
-desplazar :: Int -> Char -> Char
+desplazar :: Integer -> Char -> Char
 
 desplazar n l | not (esMin l) = l
 desplazar n l | esMin l = natALet ((letANat l) + (mod n 26))
@@ -46,14 +46,14 @@ contar char lista | head (lista) == char = 1 + (contar char (tail lista))
 contar char lista | head (lista) /= char = contar char (tail lista)
 
 
-codificar :: Int -> String -> String 
+codificar :: Integer -> String -> String 
 
 codificar x [] = []
 codificar x (hmsj:tmsj) | not(esMin hmsj) = hmsj : codificar x tmsj
 codificar x (hmsj:tmsj) | esMin hmsj = (desplazar x hmsj) : codificar x tmsj
 
 
-decodificar :: Int -> String -> String
+decodificar :: Integer -> String -> String
 
 decodificar x [] = []
 decodificar x (hmsj:tmsj) | not(esMin hmsj) = hmsj : decodificar x tmsj
@@ -75,7 +75,7 @@ porcentaje char msj | otherwise = fromIntegral(contar (natALet char) msj) / from
 
 --Esta función toma el primer elemento de la lista 
 --y lo pone al final n veces
-rotar :: Int -> [a] -> [a]
+rotar :: Integer -> [a] -> [a]
 rotar 0 msj = msj
 rotar n (hmsj:tmsj) = rotar (n-1) (tmsj ++ [hmsj])
 
@@ -95,17 +95,17 @@ descifrar :: String -> String
 descifrar mensaje = decodificar (selTabla (genTablas 0 (frec mensaje))) mensaje
 
 --selecciona cual de las 25 tablas de rotación es la más parecida al castellano
-selTabla :: [(Int,Float)] -> Int
+selTabla :: [(Integer,Float)] -> Integer
 selTabla (htab:ttab) = auxSelTab htab ttab
 
-auxSelTab :: (Int,Float) -> [(Int,Float)] -> Int
+auxSelTab :: (Integer,Float) -> [(Integer,Float)] -> Integer
 auxSelTab (rot,frec) [] = rot
 auxSelTab (rot,frec) (htab:ttab) | frec < snd htab = auxSelTab (rot,frec) ttab
 auxSelTab (rot,frec) (htab:ttab) | frec >= snd htab = auxSelTab htab ttab
 
 --genera las 25 rotaciones de la tabla de frecuencia,
 --la recurrencia va hacia arriba, hay que ingresar 0 como primer parametro
-genTablas :: Int -> [Float] -> [(Int,Float)]
+genTablas :: Integer -> [Float] -> [(Integer,Float)]
 genTablas 25 frecMsj = [(25, chi2 frecMsj castellano )]
 genTablas rot frecMsj = (rot, chi2 frecMsj castellano) : genTablas (rot+1) (rotar 1 frecMsj)
 	
@@ -115,5 +115,5 @@ castellano = [12.52, 1.42, 4.67, 5.85, 13.67, 0.67, 1.01, 0.70, 6.24, 0.44, 0.01
 {- 7)
 a) Es fácil, es solamente llamar la función frec con el texto.
 b) Acá es donde se pone picante.
--}
+-} 
 
