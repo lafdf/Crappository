@@ -112,8 +112,3 @@ genTablas rot frecMsj = (rot, chi2 frecMsj castellano) : genTablas (rot+1) (rota
 --Tabla con los porcentajes de todas las letras
 castellano = [12.52, 1.42, 4.67, 5.85, 13.67, 0.67, 1.01, 0.70, 6.24, 0.44, 0.01, 4.96, 3.15, 6.70, 8.67, 2.51, 0.88, 6.86, 7.97, 4.62, 3.92, 0.90, 0.02, 0.22, 0.90, 0.52]
 
-{- 7)
-a) Es fácil, es solamente llamar la función frec con el texto.
-b) Acá es donde se pone picante.
--} 
-
